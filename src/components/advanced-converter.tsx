@@ -167,14 +167,14 @@ export default function AdvancedConverter() {
     }
   }, [format, options.autoDetect])
 
-  // Debounced conversion
-  const debouncedConvert = useCallback(
-    debounce((input: string, conversionMode: ConversionMode, encodingFormat: EncodingFormat) => {
-      convertText(input, conversionMode, encodingFormat)
-      detectAndSuggestFormat(input)
-    }, 300),
-    [convertText, detectAndSuggestFormat]
-  )
+const debouncedConvert = useCallback(
+  debounce((...args: unknown[]) => {
+    const [input, conversionMode, encodingFormat] = args as [string, ConversionMode, EncodingFormat]
+    convertText(input, conversionMode, encodingFormat)
+    detectAndSuggestFormat(input)
+  }, 300),
+  [convertText, detectAndSuggestFormat]
+)
 
   // Handle input changes
   useEffect(() => {
