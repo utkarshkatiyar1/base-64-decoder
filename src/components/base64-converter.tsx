@@ -40,13 +40,13 @@ export default function Base64Converter() {
           <span className="text-foreground font-medium"> Fast, secure, and reliable.</span>
         </p>
         <div className="flex flex-wrap justify-center gap-4 mt-6 text-sm">
-          <span className="px-3 py-1 rounded-md bg-muted text-muted-foreground">
+          <span className="px-3 py-1 rounded-md bg-muted text-card-foreground font-medium">
             Real-time Processing
           </span>
-          <span className="px-3 py-1 rounded-md bg-muted text-muted-foreground">
+          <span className="px-3 py-1 rounded-md bg-muted text-card-foreground font-medium">
             100% Client-side
           </span>
-          <span className="px-3 py-1 rounded-md bg-muted text-muted-foreground">
+          <span className="px-3 py-1 rounded-md bg-muted text-card-foreground font-medium">
             No Data Storage
           </span>
         </div>

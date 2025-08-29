@@ -3,7 +3,7 @@ import { MetadataRoute } from 'next'
 export const revalidate = 86400;
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://base64converter.dev'
+  const baseUrl = 'https://utkarshkatiyar1.github.io/base-64-decoder'
 
   return [
     {

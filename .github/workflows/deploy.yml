@@ -1,0 +1,65 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Run tests
+      run: npm test -- --passWithNoTests
+      
+    - name: Build application
+      run: npm run build
+      env:
+        NODE_ENV: production
+        
+    - name: Optimize build
+      run: |
+        # Compress static assets
+        find out -name "*.js" -exec gzip -k {} \;
+        find out -name "*.css" -exec gzip -k {} \;
+        find out -name "*.html" -exec gzip -k {} \;
+        
+        # Generate sitemap
+        echo "https://utkarshkatiyar1.github.io/base-64-decoder" > out/sitemap.txt
+        echo "https://utkarshkatiyar1.github.io/base-64-decoder/basic" >> out/sitemap.txt
+        echo "https://utkarshkatiyar1.github.io/base-64-decoder/advanced" >> out/sitemap.txt
+        echo "https://utkarshkatiyar1.github.io/base-64-decoder/batch" >> out/sitemap.txt
+        
+        # Create robots.txt for GitHub Pages
+        echo "User-agent: *" > out/robots.txt
+        echo "Allow: /" >> out/robots.txt
+        echo "Sitemap: https://utkarshkatiyar1.github.io/base-64-decoder/sitemap.xml" >> out/robots.txt
+        
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      if: github.ref == 'refs/heads/main'
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./out
+        cname: false
+        
+    - name: Lighthouse CI
+      uses: treosh/lighthouse-ci-action@v10
+      with:
+        uploadArtifacts: true
+        temporaryPublicStorage: true
+        configPath: './lighthouserc.json'
