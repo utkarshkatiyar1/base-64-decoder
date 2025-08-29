@@ -41,7 +41,7 @@ describe('Base64 Utility Functions', () => {
     })
 
     it('should handle non-string input', () => {
-      const result = encodeToBase64(123 as any)
+      const result = encodeToBase64(123 as unknown as string)
       expect(result.success).toBe(false)
       expect(result.error).toContain('Input must be a string')
     })
@@ -73,7 +73,7 @@ describe('Base64 Utility Functions', () => {
     })
 
     it('should handle non-string input', () => {
-      const result = decodeFromBase64(null as any)
+      const result = decodeFromBase64(null as unknown as string)
       expect(result.success).toBe(false)
       expect(result.error).toContain('Input must be a non-empty string')
     })
@@ -90,7 +90,7 @@ describe('Base64 Utility Functions', () => {
       expect(isValidBase64('Invalid!')).toBe(false)
       expect(isValidBase64('SGVsbG8g=')).toBe(false) // Invalid padding
       expect(isValidBase64('')).toBe(false)
-      expect(isValidBase64(null as any)).toBe(false)
+      expect(isValidBase64(null as unknown as string)).toBe(false)
     })
 
     it('should handle Base64 with whitespace', () => {
@@ -118,13 +118,14 @@ describe('Base64 Utility Functions', () => {
 
     it('should handle edge cases', () => {
       expect(detectInputFormat('')).toBe('unknown')
-      expect(detectInputFormat(null as any)).toBe('unknown')
+      expect(detectInputFormat(null as unknown as string)).toBe('unknown')
     })
   })
 
   describe('formatBase64', () => {
     it('should format Base64 with line breaks', () => {
-      const longBase64 = 'SGVsbG8gV29ybGQgdGhpcyBpcyBhIGxvbmcgc3RyaW5nIHRoYXQgc2hvdWxkIGJlIGZvcm1hdHRlZCB3aXRoIGxpbmUgYnJlYWtz'
+      const longBase64 =
+        'SGVsbG8gV29ybGQgdGhpcyBpcyBhIGxvbmcgc3RyaW5nIHRoYXQgc2hvdWxkIGJlIGZvcm1hdHRlZCB3aXRoIGxpbmUgYnJlYWtz'
       const formatted = formatBase64(longBase64, 20)
       expect(formatted).toContain('\n')
       expect(formatted.split('\n').every(line => line.length <= 20)).toBe(true)
@@ -179,7 +180,7 @@ describe('Base64 Utility Functions', () => {
       it(`should correctly round-trip: "${testCase}"`, () => {
         const encoded = encodeToBase64(testCase)
         expect(encoded.success).toBe(true)
-        
+
         const decoded = decodeFromBase64(encoded.data!)
         expect(decoded.success).toBe(true)
         expect(decoded.data).toBe(testCase)
