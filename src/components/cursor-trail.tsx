@@ -1,74 +1,60 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 
-export function CursorTrail() {
-  const [mounted, setMounted] = useState(false)
+export default function CursorTrail() {
   const trailRef = useRef<HTMLDivElement>(null)
   const particlesRef = useRef<HTMLDivElement[]>([])
   const mousePos = useRef({ x: 0, y: 0 })
   const isMoving = useRef(false)
-
-  // Only render on client side
-  useEffect(() => {
-    setMounted(true)
-  }, [])
+  const timeoutsRef = useRef<Set<ReturnType<typeof setTimeout>>>(new Set())
 
   useEffect(() => {
-    if (!mounted) return
-
     let animationFrame: number
     let particleTimeout: ReturnType<typeof setTimeout>
     let isAnimating = false
 
     const updateTrail = () => {
       if (!isAnimating || !trailRef.current) return
-
       trailRef.current.style.transform = `translate3d(${mousePos.current.x - 10}px, ${mousePos.current.y - 10}px, 0)`
       animationFrame = requestAnimationFrame(updateTrail)
     }
 
     const createParticle = () => {
-      if (!isMoving.current || particlesRef.current.length > 10) return
-
+      if (!isMoving.current || particlesRef.current.length > 8) return
       const particle = document.createElement('div')
       particle.className = 'cursor-particle'
-      particle.style.transform = `translate3d(${mousePos.current.x - 2}px, ${mousePos.current.y - 2}px, 0)`
-
+      particle.style.cssText = `
+        position: fixed;
+        width: 4px;
+        height: 4px;
+        background: rgba(37, 99, 235, 0.6);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9998;
+        transform: translate3d(${mousePos.current.x - 2}px, ${mousePos.current.y - 2}px, 0);
+      `
       document.body.appendChild(particle)
       particlesRef.current.push(particle)
 
-      // Remove particle after animation with proper cleanup
       const timeoutId = setTimeout(() => {
-        if (particle.parentNode) {
-          particle.parentNode.removeChild(particle)
-        }
+        particle.remove()
         const index = particlesRef.current.indexOf(particle)
-        if (index > -1) {
-          particlesRef.current.splice(index, 1)
-        }
-      }, 1000)
+        if (index > -1) particlesRef.current.splice(index, 1)
+        timeoutsRef.current.delete(timeoutId)
+      }, 800)
 
-      // Store timeout ID for cleanup
-      particle.dataset.timeoutId = timeoutId.toString()
+      timeoutsRef.current.add(timeoutId)
     }
 
     const handleMouseMove = (e: MouseEvent) => {
       mousePos.current = { x: e.clientX, y: e.clientY }
       isMoving.current = true
-
-      // Create particles less frequently for better performance
-      if (Math.random() < 0.05) {
-        createParticle()
-      }
-
-      // Clear existing timeout
+      if (Math.random() < 0.03) createParticle()
       clearTimeout(particleTimeout)
-
-      // Set new timeout to stop creating particles
       particleTimeout = setTimeout(() => {
         isMoving.current = false
-      }, 150)
+      }, 100)
     }
 
     const handleMouseEnter = (e: MouseEvent) => {
@@ -85,11 +71,9 @@ export function CursorTrail() {
       }
     }
 
-    // Start animation safely
     isAnimating = true
     updateTrail()
 
-    // Add event listeners with passive option for better performance
     document.addEventListener('mousemove', handleMouseMove, { passive: true })
     document.addEventListener('mouseover', handleMouseEnter, { passive: true })
     document.addEventListener('mouseout', handleMouseLeave, { passive: true })
@@ -102,37 +86,18 @@ export function CursorTrail() {
       document.removeEventListener('mouseover', handleMouseEnter)
       document.removeEventListener('mouseout', handleMouseLeave)
       document.body.classList.remove('cursor-hover')
-
-      // Clean up particles with timeout cleanup
-      const particles = [...particlesRef.current]
-      particles.forEach(particle => {
-        if (particle.parentNode) {
-          particle.parentNode.removeChild(particle)
-        }
-        // Clear associated timeout
-        const timeoutId = particle.dataset.timeoutId
-        if (timeoutId) {
-          clearTimeout(parseInt(timeoutId))
-        }
-      })
+      timeoutsRef.current.forEach(clearTimeout)
+      timeoutsRef.current.clear()
+      particlesRef.current.forEach(p => p.remove())
       particlesRef.current = []
     }
-  }, [mounted])
-
-  // Don't render on server side
-  if (!mounted) {
-    return null
-  }
+  }, [])
 
   return (
     <div
       ref={trailRef}
       className="cursor-trail"
-      style={{
-        position: 'fixed',
-        pointerEvents: 'none',
-        zIndex: 9999,
-      }}
+      style={{ position: 'fixed', pointerEvents: 'none', zIndex: 9999 }}
     />
   )
 }

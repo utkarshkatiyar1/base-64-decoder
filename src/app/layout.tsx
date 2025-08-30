@@ -8,7 +8,7 @@ import { PerformanceOptimizer, WebVitalsReporter } from "@/components/performanc
 import { CoreWebVitalsOptimizer, ResourceHints } from "@/components/core-web-vitals";
 import { SEOOptimizer, SocialMediaOptimizer } from "@/components/seo-optimizer";
 import { NavigationWrapper } from "@/components/navigation-wrapper";
-import { CursorTrail } from "@/components/cursor-trail";
+import CursorTrail from "@/components/cursor-trail"
 import { enhancedMetadata } from "@/components/enhanced-metadata";
 
 const geistSans = Geist({
@@ -96,8 +96,8 @@ export default function RootLayout({
           <SEOOptimizer />
           <SocialMediaOptimizer />
           <StructuredData />
-          {/* <NavigationWrapper /> */}
-          {/* <CursorTrail /> */}
+          <NavigationWrapper />
+          <CursorTrail />
           <ThemeToggle />
           {children}
         </ThemeProvider>
