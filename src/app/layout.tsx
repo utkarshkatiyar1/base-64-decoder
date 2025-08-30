@@ -7,6 +7,9 @@ import { StructuredData } from "@/components/structured-data";
 import { PerformanceOptimizer, WebVitalsReporter } from "@/components/performance-optimizer";
 import { CoreWebVitalsOptimizer, ResourceHints } from "@/components/core-web-vitals";
 import { SEOOptimizer, SocialMediaOptimizer } from "@/components/seo-optimizer";
+import { NavigationWrapper } from "@/components/navigation-wrapper";
+import { CursorTrail } from "@/components/cursor-trail";
+import { enhancedMetadata } from "@/components/enhanced-metadata";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,77 +22,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  ...enhancedMetadata,
   metadataBase: new URL('https://utkarshkatiyar1.github.io/base-64-decoder'),
-  title: {
-    default: "Base64 Converter - Free Online Encoder & Decoder Tool | Fast & Secure",
-    template: "%s | Base64 Converter"
-  },
-  description: "🚀 The most advanced Base64 encoder and decoder online. Convert text, files, hex, binary with real-time processing. 100% secure, client-side only. Supports batch conversion, drag & drop, and multiple formats. No registration required.",
-  keywords: [
-    "base64 encoder",
-    "base64 decoder",
-    "base64 converter",
-    "online base64 tool",
-    "text to base64",
-    "base64 to text",
-    "file to base64",
-    "hex to base64",
-    "binary to base64",
-    "ascii85 converter",
-    "url safe base64",
-    "batch base64 converter",
-    "free base64 tool",
-    "secure base64 converter",
-    "client side base64",
-    "real time base64",
-    "drag drop base64",
-    "mobile base64 converter",
-    "fast base64 tool",
-    "premium base64 converter"
-  ],
-  authors: [{ name: "Base64 Converter Team", url: "https://base64converter.dev" }],
-  creator: "Base64 Converter",
-  publisher: "Base64 Converter",
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: "https://utkarshkatiyar1.github.io/base-64-decoder",
-    siteName: "Base64 Converter",
-    title: "Base64 Converter - Free Online Encoder & Decoder Tool | Fast & Secure",
-    description: "🚀 The most advanced Base64 encoder and decoder online. Convert text, files, hex, binary with real-time processing. 100% secure, client-side only.",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Base64 Converter - Advanced Online Tool",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    site: "@base64converter",
-    creator: "@base64converter",
-    title: "Base64 Converter - Free Online Encoder & Decoder Tool",
-    description: "🚀 The most advanced Base64 encoder and decoder online. Convert text, files, hex, binary with real-time processing.",
-    images: ["/twitter-image.png"],
-  },
   alternates: {
     canonical: "https://utkarshkatiyar1.github.io/base-64-decoder",
   },
@@ -162,6 +96,8 @@ export default function RootLayout({
           <SEOOptimizer />
           <SocialMediaOptimizer />
           <StructuredData />
+          {/* <NavigationWrapper /> */}
+          {/* <CursorTrail /> */}
           <ThemeToggle />
           {children}
         </ThemeProvider>

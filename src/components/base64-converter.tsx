@@ -81,12 +81,17 @@ export default function Base64Converter() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Professional Input Section */}
-        <div className="space-y-4">
-          <div className="surface rounded-lg p-6">
-            <h2 className="text-xl font-semibold mb-4 text-foreground">
-              {mode === 'encode' ? 'Text Input' : 'Base64 Input'}
-            </h2>
+        {/* Premium Input Section */}
+        <div className="space-y-6">
+          <div className="card-primary rounded-2xl p-8">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
+                <span className="text-white font-bold text-sm">📝</span>
+              </div>
+              <h2 className="text-2xl font-bold text-foreground">
+                {mode === 'encode' ? 'Text Input' : 'Base64 Input'}
+              </h2>
+            </div>
             <div className="space-y-4">
               <textarea
                 value={input}
@@ -102,25 +107,30 @@ export default function Base64Converter() {
           </div>
         </div>
 
-        {/* Professional Output Section */}
-        <div className="space-y-4">
-          <div className="surface rounded-lg p-6">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xl font-semibold text-foreground">
-                {mode === 'encode' ? 'Base64 Output' : 'Decoded Output'}
-              </h2>
-              <div className="flex gap-2">
+        {/* Premium Output Section */}
+        <div className="space-y-6">
+          <div className="card-primary rounded-2xl p-8">
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                  <span className="text-white font-bold text-sm">🔐</span>
+                </div>
+                <h2 className="text-2xl font-bold text-foreground">
+                  {mode === 'encode' ? 'Base64 Output' : 'Decoded Output'}
+                </h2>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
                 <Button
                   onClick={handleConvert}
                   disabled={!input.trim()}
-                  className="px-4 py-2 bg-primary hover:bg-primary/90 text-primary-foreground font-medium rounded-lg transition-all duration-150"
+                  className="px-4 py-2 bg-primary hover:bg-primary/90 text-primary-foreground font-medium rounded-lg transition-all duration-150 min-w-[100px]"
                 >
                   Convert
                 </Button>
                 <Button
                   onClick={handleClear}
                   variant="outline"
-                  className="px-4 py-2 font-medium rounded-lg transition-all duration-150"
+                  className="px-4 py-2 font-medium rounded-lg transition-all duration-150 min-w-[100px]"
                 >
                   Clear
                 </Button>
@@ -136,20 +146,29 @@ export default function Base64Converter() {
               />
 
               {output && (
-                <div className="grid grid-cols-3 gap-3 text-sm">
-                  <div className="surface rounded-lg p-3 text-center">
-                    <div className="font-semibold text-lg text-foreground">{input.length}</div>
-                    <div className="text-muted-foreground">Input</div>
+                <div className="grid grid-cols-3 gap-4 text-sm">
+                  <div className="card-accent rounded-xl p-4 text-center cursor-interactive">
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 mx-auto mb-2 flex items-center justify-center">
+                      <span className="text-white font-bold text-xs">IN</span>
+                    </div>
+                    <div className="font-bold text-xl text-foreground">{input.length}</div>
+                    <div className="text-muted-foreground font-medium">Input Characters</div>
                   </div>
-                  <div className="surface rounded-lg p-3 text-center">
-                    <div className="font-semibold text-lg text-foreground">{output.length}</div>
-                    <div className="text-muted-foreground">Output</div>
+                  <div className="card-accent rounded-xl p-4 text-center cursor-interactive">
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 mx-auto mb-2 flex items-center justify-center">
+                      <span className="text-white font-bold text-xs">OUT</span>
+                    </div>
+                    <div className="font-bold text-xl text-foreground">{output.length}</div>
+                    <div className="text-muted-foreground font-medium">Output Characters</div>
                   </div>
-                  <div className="surface rounded-lg p-3 text-center">
-                    <div className="font-semibold text-lg text-primary">
+                  <div className="card-accent rounded-xl p-4 text-center cursor-interactive">
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-orange-500 to-red-600 mx-auto mb-2 flex items-center justify-center">
+                      <span className="text-white font-bold text-xs">%</span>
+                    </div>
+                    <div className="font-bold text-xl text-primary">
                       {Math.round((output.length / input.length) * 100)}%
                     </div>
-                    <div className="text-muted-foreground">Ratio</div>
+                    <div className="text-muted-foreground font-medium">Size Ratio</div>
                   </div>
                 </div>
               )}

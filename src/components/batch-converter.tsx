@@ -262,11 +262,11 @@ export default function BatchConverter() {
         </div>
 
         {/* Action Buttons */}
-        <div className="flex gap-2">
+        <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
           <Button
             onClick={processAll}
             disabled={isProcessing || items.every(item => !item.input.trim())}
-            className="flex items-center gap-2"
+            className="flex items-center gap-2 min-w-[120px] justify-center"
           >
             {isProcessing ? (
               <RefreshCw className="h-4 w-4 animate-spin" />
@@ -275,11 +275,11 @@ export default function BatchConverter() {
             )}
             Process All
           </Button>
-          
+
           <Button
             onClick={addItem}
             variant="outline"
-            className="flex items-center gap-2"
+            className="flex items-center gap-2 min-w-[100px] justify-center"
           >
             <Plus className="h-4 w-4" />
             Add Row
@@ -305,13 +305,13 @@ export default function BatchConverter() {
       <div className="space-y-4">
         <div className="flex justify-between items-center">
           <h2 className="text-xl font-semibold">Batch Items ({items.length})</h2>
-          <div className="flex gap-2">
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
             <Button
               onClick={copyAllResults}
               variant="outline"
               size="sm"
               disabled={successCount === 0}
-              className="flex items-center gap-2"
+              className="flex items-center gap-2 min-w-[110px] justify-center"
             >
               <Copy className="h-4 w-4" />
               Copy Results
@@ -321,7 +321,7 @@ export default function BatchConverter() {
               variant="outline"
               size="sm"
               disabled={items.length === 0}
-              className="flex items-center gap-2"
+              className="flex items-center gap-2 min-w-[120px] justify-center"
             >
               <Download className="h-4 w-4" />
               Download CSV
@@ -330,7 +330,7 @@ export default function BatchConverter() {
               onClick={clearAll}
               variant="outline"
               size="sm"
-              className="flex items-center gap-2"
+              className="flex items-center gap-2 min-w-[90px] justify-center"
             >
               <RefreshCw className="h-4 w-4" />
               Clear All

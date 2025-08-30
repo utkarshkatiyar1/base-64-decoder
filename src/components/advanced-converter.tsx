@@ -411,13 +411,13 @@ const debouncedConvert = useCallback(
             <h2 className="text-xl font-semibold">
               {mode === 'encode' ? `${format.toUpperCase()} Output` : 'Decoded Output'}
             </h2>
-            <div className="flex gap-2">
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
               <Button
                 onClick={handleCopy}
                 variant="outline"
                 size="sm"
                 disabled={!output}
-                className="flex items-center gap-2"
+                className="flex items-center gap-2 min-w-[80px] justify-center"
               >
                 <Copy className="h-4 w-4" />
                 Copy
@@ -427,7 +427,7 @@ const debouncedConvert = useCallback(
                 variant="outline"
                 size="sm"
                 disabled={!output}
-                className="flex items-center gap-2"
+                className="flex items-center gap-2 min-w-[100px] justify-center"
               >
                 <Download className="h-4 w-4" />
                 Download
@@ -436,7 +436,7 @@ const debouncedConvert = useCallback(
                 onClick={handleClear}
                 variant="outline"
                 size="sm"
-                className="flex items-center gap-2"
+                className="flex items-center gap-2 min-w-[80px] justify-center"
               >
                 <RefreshCw className="h-4 w-4" />
                 Clear

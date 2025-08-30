@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://base64converter.dev/sitemap.xml
+Sitemap: https://utkarshkatiyar1.github.io/base-64-decoder/sitemap.xml
 
 # Crawl-delay for respectful crawling
 Crawl-delay: 1

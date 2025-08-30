@@ -35,8 +35,8 @@ export function CoreWebVitalsOptimizer() {
     const optimizeFID = () => {
       // Break up long tasks
       const scheduleWork = (callback: () => void) => {
-        if ('scheduler' in window && 'postTask' in (window as any).scheduler) {
-          ;(window as any).scheduler.postTask(callback, { priority: 'user-blocking' })
+        if ('scheduler' in window && 'postTask' in (window as Window & { scheduler?: { postTask: Function } }).scheduler) {
+          ;(window as Window & { scheduler: { postTask: Function } }).scheduler.postTask(callback, { priority: 'user-blocking' })
         } else {
           setTimeout(callback, 0)
         }
@@ -90,7 +90,7 @@ export function CoreWebVitalsOptimizer() {
       // Monitor LCP
       const lcpObserver = new PerformanceObserver((list) => {
         const entries = list.getEntries()
-        const lastEntry = entries[entries.length - 1] as any
+        const lastEntry = entries[entries.length - 1] as PerformanceEntry & { startTime: number }
         if (lastEntry && process.env.NODE_ENV === 'development') {
           console.log('LCP:', lastEntry.startTime)
         }
@@ -100,9 +100,9 @@ export function CoreWebVitalsOptimizer() {
       // Monitor FID
       const fidObserver = new PerformanceObserver((list) => {
         const entries = list.getEntries()
-        entries.forEach((entry: any) => {
+        entries.forEach((entry: PerformanceEntry & { processingStart?: number; startTime: number }) => {
           if (process.env.NODE_ENV === 'development') {
-            console.log('FID:', entry.processingStart - entry.startTime)
+            console.log('FID:', (entry.processingStart || 0) - entry.startTime)
           }
         })
       })

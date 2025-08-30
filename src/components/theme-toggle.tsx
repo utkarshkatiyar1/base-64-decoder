@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Moon, Sun, Monitor } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useTheme } from '@/components/theme-provider'
@@ -9,6 +9,11 @@ import { cn } from '@/lib/utils'
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme()
   const [isHovered, setIsHovered] = useState(false)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   const cycleTheme = () => {
     if (theme === 'light') {
@@ -31,6 +36,11 @@ export function ThemeToggle() {
       default:
         return <Sun className="h-4 w-4" />
     }
+  }
+
+  // Don't render on server side
+  if (!mounted) {
+    return null
   }
 
   return (

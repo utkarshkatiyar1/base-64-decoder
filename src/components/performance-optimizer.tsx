@@ -67,7 +67,9 @@ export function WebVitalsReporter() {
         list.getEntries().forEach((entry) => {
           // Log performance metrics for debugging
           if (process.env.NODE_ENV === 'development') {
-            console.log(`${entry.name}: ${entry.value}`)
+            const value = 'value' in entry ? (entry as any).value :
+                         'duration' in entry ? entry.duration : 'N/A'
+            console.log(`${entry.name}: ${value}`)
           }
         })
       })
