@@ -1,6 +1,26 @@
 {
   "name": "base-64-decoder",
-  "version": "0.1.0",
+  "version": "2.0.0",
+  "description": "Premium Base64 encoder/decoder with modern UI, file support, and enterprise-grade performance",
+  "author": {
+    "name": "Utkarsh Katiyar",
+    "url": "https://github.com/utkarshkatiyar1"
+  },
+  "homepage": "https://utkarshkatiyar1.github.io/base-64-decoder/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/utkarshkatiyar1/base-64-decoder.git"
+  },
+  "keywords": [
+    "base64",
+    "encoder",
+    "decoder",
+    "converter",
+    "nextjs",
+    "typescript",
+    "tailwindcss"
+  ],
+  "license": "MIT",
   "private": true,
   "scripts": {
     "dev": "next dev",

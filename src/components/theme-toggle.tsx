@@ -28,51 +28,72 @@ export function ThemeToggle() {
   const getThemeIcon = () => {
     switch (theme) {
       case 'light':
-        return <Sun className="h-4 w-4" />
+        return <Sun className="h-[18px] w-[18px] transition-transform duration-300 rotate-0 scale-100" />
       case 'dark':
-        return <Moon className="h-4 w-4" />
+        return <Moon className="h-[18px] w-[18px] transition-transform duration-300 rotate-0 scale-100" />
       case 'system':
-        return <Monitor className="h-4 w-4" />
+        return <Monitor className="h-[18px] w-[18px] transition-transform duration-300 rotate-0 scale-100" />
       default:
-        return <Sun className="h-4 w-4" />
+        return <Sun className="h-[18px] w-[18px] transition-transform duration-300 rotate-0 scale-100" />
     }
   }
 
-  // Don't render on server side
+  const getThemeLabel = () => {
+    switch (theme) {
+      case 'light': return 'Light'
+      case 'dark': return 'Dark'
+      case 'system': return 'Auto'
+      default: return 'Light'
+    }
+  }
+
   if (!mounted) {
-    return null
+    return (
+      <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50">
+        <div className="h-11 w-11 sm:h-12 sm:w-12 rounded-xl bg-muted/50 animate-pulse" />
+      </div>
+    )
   }
 
   return (
     <div
-      className="fixed bottom-6 right-6 z-50 group"
+      className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 group"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Hover trigger area */}
-      <div className="w-12 h-12 flex items-center justify-center">
-        <Button
-          variant="outline"
-          size="icon"
-          onClick={cycleTheme}
-          className={cn(
-            "h-10 w-10 rounded-lg border border-border bg-card/95 backdrop-blur-sm transition-all duration-200",
-            "hover:bg-card hover:border-primary/50 hover:shadow-md",
-            isHovered ? "opacity-100 scale-100" : "opacity-60 scale-90"
-          )}
-          title={`Current theme: ${theme}. Click to cycle through themes.`}
-        >
+      <Button
+        variant="outline"
+        size="icon"
+        onClick={cycleTheme}
+        className={cn(
+          "h-11 w-11 sm:h-12 sm:w-12 rounded-xl border-2 transition-all duration-300 ease-out",
+          "bg-background/80 backdrop-blur-md shadow-lg hover:shadow-xl",
+          "border-border/50 hover:border-primary/30",
+          "hover:bg-background/90 active:scale-95",
+          "focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
+          isHovered ? "scale-105" : "scale-100"
+        )}
+        title={`Switch to ${theme === 'light' ? 'dark' : theme === 'dark' ? 'auto' : 'light'} mode`}
+      >
+        <div className="relative flex items-center justify-center">
           {getThemeIcon()}
-          <span className="sr-only">Toggle theme (current: {theme})</span>
-        </Button>
-      </div>
-
-      {/* Theme label on hover */}
-      {isHovered && (
-        <div className="absolute bottom-full right-0 mb-2 px-2 py-1 bg-card border border-border rounded text-xs text-muted-foreground whitespace-nowrap fade-in">
-          {theme === 'light' ? 'Light mode' : theme === 'dark' ? 'Dark mode' : 'System mode'}
         </div>
-      )}
+        <span className="sr-only">Toggle theme (current: {theme})</span>
+      </Button>
+
+      {/* Enhanced tooltip */}
+      <div className={cn(
+        "absolute bottom-full right-0 mb-3 px-3 py-1.5 rounded-lg text-xs font-medium",
+        "bg-popover/95 backdrop-blur-sm border border-border/50 shadow-md",
+        "text-popover-foreground whitespace-nowrap pointer-events-none",
+        "transition-all duration-200 ease-out",
+        isHovered 
+          ? "opacity-100 translate-y-0 scale-100" 
+          : "opacity-0 translate-y-1 scale-95"
+      )}>
+        {getThemeLabel()} mode
+        <div className="absolute top-full right-3 w-0 h-0 border-l-[4px] border-r-[4px] border-t-[4px] border-l-transparent border-r-transparent border-t-border/50" />
+      </div>
     </div>
   )
 }

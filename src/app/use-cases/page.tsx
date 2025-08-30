@@ -302,7 +302,7 @@ const base64Data = await fileToBase64(selectedFile);`}
         </section>
 
         {/* Navigation */}
-        <div className="flex justify-center gap-4">
+        <div className="flex justify-center gap-4 mb-16">
           <Link
             href="/how-to-use"
             className="px-6 py-3 border border-border rounded-lg hover:bg-muted transition-colors"
@@ -317,6 +317,38 @@ const base64Data = await fileToBase64(selectedFile);`}
           </Link>
         </div>
       </div>
+      
+      <footer className="mt-16 py-8 border-t border-border">
+        <div className="container mx-auto px-6 text-center max-w-4xl">
+          <div className="mb-6">
+            <h3 className="text-lg font-semibold gradient-text mb-2">Base64 Converter</h3>
+            <p className="text-muted-foreground text-sm">
+              Professional Base64 encoding and decoding tool for developers
+            </p>
+          </div>
+
+          <div className="flex flex-wrap justify-center gap-6 mb-6 text-xs text-muted-foreground">
+            <Link href="/" className="hover:text-foreground transition-colors">Converter</Link>
+            <span>•</span>
+            <Link href="/how-to-use" className="hover:text-foreground transition-colors">How to Use</Link>
+            <span>•</span>
+            <Link href="/faq" className="hover:text-foreground transition-colors">FAQ</Link>
+            <span>•</span>
+            <span>100% Secure</span>
+            <span>•</span>
+            <span>Real-time Processing</span>
+          </div>
+
+          <div className="border-t border-border pt-6">
+            <p className="text-xs text-muted-foreground">
+              © 2024 Base64 Converter by <span className="font-medium text-foreground">Utkarsh Katiyar</span>. Built with Next.js, TypeScript & Tailwind CSS.
+            </p>
+            <p className="mt-1 text-xs text-muted-foreground">
+              Client-side processing ensures your data never leaves your browser.
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }

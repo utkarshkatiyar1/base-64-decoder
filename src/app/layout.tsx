@@ -52,7 +52,7 @@ export default function RootLayout({
         {/* Critical CSS inlined for LCP optimization */}
         <style dangerouslySetInnerHTML={{
           __html: `
-            body{background:rgb(255 255 255);color:rgb(15 23 42);font-family:system-ui,-apple-system,sans-serif;line-height:1.6;transition:background-color 0.2s ease,color 0.2s ease}
+            body{background:linear-gradient(135deg,#f8fafc 0%,#f1f5f9 30%,#e2e8f0 100%);color:rgb(15 23 42);font-family:system-ui,-apple-system,sans-serif;line-height:1.6;transition:background-color 0.2s ease,color 0.2s ease}
             .dark{background:rgb(9 9 11);color:rgb(250 250 250)}
             .fade-in{animation:fadeIn 0.3s ease-out}
             @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}

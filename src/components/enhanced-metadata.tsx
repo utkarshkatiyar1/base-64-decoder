@@ -28,9 +28,9 @@ export const enhancedMetadata: Metadata = {
   ],
   
   // Authors and creators
-  authors: [{ name: 'Base64 Converter Pro' }],
-  creator: 'Base64 Converter Pro',
-  publisher: 'Base64 Converter Pro',
+  authors: [{ name: 'Utkarsh Katiyar', url: 'https://github.com/utkarshkatiyar1' }],
+  creator: 'Utkarsh Katiyar',
+  publisher: 'Utkarsh Katiyar',
   
   // Robots and indexing
   robots: {
@@ -74,15 +74,15 @@ export const enhancedMetadata: Metadata = {
   // Twitter Card
   twitter: {
     card: 'summary_large_image',
-    site: '@base64converter',
-    creator: '@base64converter',
+    site: '@utkarshkatiyar1',
+    creator: '@utkarshkatiyar1',
     title: 'Base64 Converter - #1 Free Online Tool',
     description: '🚀 Instantly encode & decode text, files, images to Base64. Free, secure, fast. No registration required!',
     images: ['https://utkarshkatiyar1.github.io/base-64-decoder/twitter-image.png'],
   },
   
   // App metadata
-  applicationName: 'Base64 Converter Pro',
+  applicationName: 'Base64 Converter by Utkarsh Katiyar',
   referrer: 'origin-when-cross-origin',
   
   // Verification

@@ -8,7 +8,7 @@ export function StructuredData() {
       "name": "Base64 Converter - Advanced Online Tool",
       "alternateName": ["Base64 Encoder", "Base64 Decoder", "Base64 Tool"],
       "description": "The most advanced Base64 encoder and decoder online. Convert text, files, hex, binary with real-time processing. 100% secure, client-side only. Supports batch conversion and multiple formats.",
-      "url": "https://base64converter.dev",
+      "url": "https://utkarshkatiyar1.github.io/base-64-decoder/",
       "applicationCategory": ["UtilityApplication", "DeveloperApplication", "ProductivityApplication"],
       "operatingSystem": ["Windows", "macOS", "Linux", "iOS", "Android"],
       "browserRequirements": "Requires JavaScript. Requires HTML5. Works with Chrome, Firefox, Safari, Edge.",
@@ -39,14 +39,14 @@ export function StructuredData() {
       "datePublished": "2024-01-01",
       "dateModified": "2024-12-29",
       "author": {
-        "@type": "Organization",
-        "name": "Base64 Converter Team",
-        "url": "https://base64converter.dev"
+        "@type": "Person",
+        "name": "Utkarsh Katiyar",
+        "url": "https://github.com/utkarshkatiyar1"
       },
       "publisher": {
-        "@type": "Organization",
-        "name": "Base64 Converter",
-        "url": "https://base64converter.dev"
+        "@type": "Person",
+        "name": "Utkarsh Katiyar",
+        "url": "https://utkarshkatiyar1.github.io/base-64-decoder/"
       },
       "aggregateRating": {
         "@type": "AggregateRating",
@@ -55,7 +55,7 @@ export function StructuredData() {
         "bestRating": "5",
         "worstRating": "1"
       },
-      "screenshot": "https://base64converter.dev/screenshot.png"
+      "screenshot": "https://utkarshkatiyar1.github.io/base-64-decoder/screenshot.png"
     },
     {
       "@context": "https://schema.org",

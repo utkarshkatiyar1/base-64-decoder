@@ -124,7 +124,7 @@ export default function Home() {
 
           <div className="border-t border-border pt-6">
             <p className="text-xs text-muted-foreground">
-              © 2024 Base64 Converter. Built with Next.js, TypeScript & Tailwind CSS.
+              © 2024 Base64 Converter by <span className="font-medium text-foreground">Utkarsh Katiyar</span>. Built with Next.js, TypeScript & Tailwind CSS.
             </p>
             <p className="mt-1 text-xs text-muted-foreground">
               Client-side processing ensures your data never leaves your browser.
